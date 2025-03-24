@@ -43,6 +43,20 @@ app.get('/shipping/:cep', (req, res, next) => {
 });
 
 /**
+ * Consulta de livros por Id
+ */
+app.get('/product/:id', (req, res, next) => {
+    inventory.SearchProductByID({ id: req.params.id }, (err, product) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send({ error: 'something failed :(' });
+        } else {
+            res.json(product);
+        }
+    });
+});
+
+/**
  * Inicia o router
  */
 app.listen(3000, () => {
